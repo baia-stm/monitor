@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Monitoramento</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- PWA Config -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#667eea">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NetMonitor">
+<meta name="mobile-web-app-capable" content="yes">
+
+<!-- Ícones Apple (fallback) -->
+<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">📊 Network Monitor</div>
+        <div class="nav-links">
+            <a href="/index.html" class="active">Dashboard</a>
+            <a href="/cadastro.html">Cadastro</a>
+            <a href="/relatorios.html">Relatórios</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card online">
+                <div class="stat-icon">🟢</div>
+                <div class="stat-info">
+                    <h3 id="stat-online">0</h3>
+                    <p>Online</p>
+                </div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-icon">🟠</div>
+                <div class="stat-info">
+                    <h3 id="stat-warning">0</h3>
+                    <p>Perda de Pacotes</p>
+                </div>
+            </div>
+            <div class="stat-card offline">
+                <div class="stat-icon">🔴</div>
+                <div class="stat-info">
+                    <h3 id="stat-offline">0</h3>
+                    <p>Offline</p>
+                </div>
+            </div>
+            <div class="stat-card total">
+                <div class="stat-icon">📡</div>
+                <div class="stat-info">
+                    <h3 id="stat-total">0</h3>
+                    <p>Total</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Controles -->
+        <div class="controls-bar">
+            <div class="control-group">
+                <label>Visualização:</label>
+                <button id="viewGrid" class="btn-toggle active" title="Blocos">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button id="viewList" class="btn-toggle" title="Lista">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+
+            <div class="control-group">
+                <label>Ordenar por:</label>
+                <select id="sortBy">
+                    <option value="name">Nome</option>
+                    <option value="ip">Endereço IP</option>
+                    <option value="category">Categoria</option>
+                    <option value="status">Status</option>
+                </select>
+                <button id="sortOrder" class="btn-icon" title="Inverter ordem">
+                    <i class="fas fa-sort-amount-down"></i>
+                </button>
+            </div>
+
+            <div class="control-group">
+                <label>Tamanho:</label>
+                <input type="range" id="cardSize" min="200" max="500" value="280" step="20">
+                <span id="sizeValue">280px</span>
+            </div>
+
+            <div class="control-group filter-group">
+                <label>Categorias:</label>
+                <div class="dropdown">
+                    <button class="btn-dropdown">
+                        Filtrar <i class="fas fa-filter"></i>
+                    </button>
+                    <div id="categoryFilter" class="dropdown-content">
+                        <!-- Checkboxes preenchidos via JS -->
+                    </div>
+                </div>
+            </div>
+
+<!-- Barra de Controles -->
+<div class="controls-bar">
+    <!-- ... controles existentes ... -->
+    
+    <!-- NOVO: Intervalo de Ping -->
+    <div class="control-group">
+        <label>Intervalo Ping:</label>
+        <input type="number" id="pingInterval" min="1" max="3600" value="10" style="width: 70px;">
+        <span>segundos</span>
+    </div>
+
+    <!-- ... resto dos controles ... -->
+</div>
+
+            <button id="resetView" class="btn-secondary btn-sm" title="Restaurar padrão">
+                <i class="fas fa-undo"></i> Reset
+            </button>
+        </div>
+
+        <!-- Status de Monitoramento -->
+        <div class="monitor-status">
+            <span class="pulse"></span>
+            <span>Monitoramento automático ativo (a cada 10s)</span>
+            <span id="last-update">Última atualização: --</span>
+            <span id="filtered-count" style="margin-left: auto; color: #718096;"></span>
+        </div>
+
+        <!-- Grid de Equipamentos -->
+        <div id="devices-container" class="devices-grid">
+            <!-- Preenchido via JS -->
+        </div>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
