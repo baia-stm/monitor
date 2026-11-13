@@ -6,7 +6,7 @@ const cors = require('cors');
 const fs = require('fs');
 
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 // Middleware
 app.use(cors());
@@ -282,11 +282,9 @@ app.get('/api/stats', (req, res) => {
     });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Servidor rodando em:`);
-    console.log(`   Local: http://localhost:${PORT}`);
-    console.log(`   Rede:  http://${getLocalIP()}:${PORT}`);
-    console.log(`📊 Dashboard: http://${getLocalIP()}:${PORT}/index.html`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 // Função para pegar IP local
